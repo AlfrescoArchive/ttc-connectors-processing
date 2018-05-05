@@ -17,7 +17,7 @@ image:
   tag: dev
   pullPolicy: IfNotPresent
 service:
-  name: blueprint-connectors-processing
+  name: ttc-connectors-processing
   type: ClusterIP
   externalPort: 80
   internalPort: 8080

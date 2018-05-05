@@ -9,5 +9,5 @@ dependencies:
   repository: https://chartmuseum.build.cd.jenkins-x.io
   version: 2.3.56
 - alias: preview
-  name: blueprint-connectors-processing
-  repository: file://../blueprint-connectors-processing
+  name: ttc-connectors-processing
+  repository: file://../ttc-connectors-processing

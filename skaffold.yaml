@@ -3,7 +3,7 @@ kind: Config
 build:
   tagPolicy:
     envTemplate:
-      template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/salaboy/blueprint-connectors-processing:{{.VERSION}}"
+      template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/activiti/ttc-connectors-processing:{{.VERSION}}"
   artifacts:
   - imageName: changeme
     workspace: .
@@ -17,15 +17,15 @@ profiles:
   build:
     tagPolicy:
       envTemplate:
-        template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/salaboy/blueprint-connectors-processing:{{.DIGEST_HEX}}"
+        template: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/activiti/ttc-connectors-processing:{{.DIGEST_HEX}}"
     artifacts:
     - docker: {}
     local: {}
   deploy:
     helm:
       releases:
-      - name: blueprint-connectors-processing
-        chartPath: charts/blueprint-connectors-processing
+      - name: ttc-connectors-processing
+        chartPath: charts/ttc-connectors-processing
         setValueTemplates:
-          image.repository: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/salaboy/blueprint-connectors-processing"
+          image.repository: "{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_HOST}}:{{.JENKINS_X_DOCKER_REGISTRY_SERVICE_PORT}}/activiti/ttc-connectors-processing"
           image.tag: "{{.TAG}}"
