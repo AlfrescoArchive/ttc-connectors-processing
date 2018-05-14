@@ -11,7 +11,7 @@ variables:
     password:
       value: guest
 container:
-  javaOpts: -Xmx512m -Xms512m
+  javaOpts: -Xmx512m -Xms512m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
 image:
   repository: draft
   tag: dev
