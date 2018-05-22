@@ -18,15 +18,17 @@ spec:
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         env:
         - name: JAVA_OPTS
-          value: {{ .Values.container.javaOpts }}
+          value: -Xmx{{ .Values.javaOpts.xmx }} -Xms{{ .Values.javaOpts.xms }} {{ .Values.javaOpts.other}}
         - name: SPRING_RABBITMQ_HOST
-          value: {{ default "rabbitmq" .Values.variables.rabbitmq.host.value }}
-        - name: ACT_RABBITMQ_HOST
-          value: {{ default "rabbitmq" .Values.variables.rabbitmq.host.value }}
+        {{- if .Values.global.rabbitmq.host.value }}
+          value: {{ .Values.global.rabbitmq.host.value }}
+        {{ else }}
+          value: {{ .Release.Name }}-rabbitmq
+        {{ end }}
         - name: SPRING_RABBITMQ_USERNAME
-          value: {{ default "guest" .Values.variables.rabbitmq.username.value }}
+          value: {{ .Values.global.rabbitmq.username.value }}
         - name: SPRING_RABBITMQ_PASSWORD
-          value: {{ default "guest" .Values.variables.rabbitmq.password.value }}
+          value: {{ .Values.global.rabbitmq.password.value }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}

@@ -2,16 +2,18 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 replicaCount: 1
-variables:
+global:
   rabbitmq:
     host:
-      value: jx-staging-rabbitmq
+      value: ""
     username:
       value: guest
     password:
       value: guest
-container:
-  javaOpts: -Xmx512m -Xms512m -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
+javaOpts:
+  xmx: 512m
+  xms: 512m
+  other: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
 image:
   repository: draft
   tag: dev
