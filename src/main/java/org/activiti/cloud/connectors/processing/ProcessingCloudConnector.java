@@ -25,12 +25,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import static net.logstash.logback.marker.Markers.append;
 
 @SpringBootApplication
 @EnableActivitiCloudConnector
 @ComponentScan({"org.activiti.cloud.connectors.starter", "org.activiti.cloud.connectors.processing"})
+@RestController
 public class ProcessingCloudConnector implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(ProcessingCloudConnector.class);
@@ -43,6 +47,11 @@ public class ProcessingCloudConnector implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(ProcessingCloudConnector.class,
                               args);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public String welcome() {
+        return "Welcome to the Content Processing and Sentiment Analysis Cloud Connector";
     }
 
     @Override
