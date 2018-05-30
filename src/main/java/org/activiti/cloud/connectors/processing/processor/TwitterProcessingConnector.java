@@ -39,7 +39,8 @@ public class TwitterProcessingConnector {
 
         String tweet = String.valueOf(event.getVariables().get("text"));
         logger.info(append("service-name", appName),"placeholder for doing cleaning/processing of posted content sized "+(tweet==null?"null":tweet.length()));
-        //TODO: perform processing
+
+        //@TODO: perform processing here
 
         Map<String, Object> results = new HashMap<>();
         results.put("text",
