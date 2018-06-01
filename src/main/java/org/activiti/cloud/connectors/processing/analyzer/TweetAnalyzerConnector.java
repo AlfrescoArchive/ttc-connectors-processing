@@ -41,8 +41,15 @@ public class TweetAnalyzerConnector {
 
         // based on http://rahular.com/twitter-sentiment-analysis/
         // note you get a lot of 1s but there are some zeros if you search for "attitude: 0"
-        results.put("attitude",
-                NLP.findSentiment(tweet));
+        int sentiment = NLP.findSentiment(tweet);
+        String attitude = "neutral";
+        if(sentiment >=3){
+            attitude = "positive";
+        }else if(sentiment < 1){
+            attitude = "negative";
+        }
+
+        results.put("attitude", attitude);
 
         logger.info(append("service-name", appName),"analyzed tweet with sentiment "+results.get("attitude"));
 
