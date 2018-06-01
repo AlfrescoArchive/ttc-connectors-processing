@@ -50,6 +50,7 @@ public class TweetAnalyzerConnector {
         }
 
         results.put("attitude", attitude);
+        results.put("matched", "true");
 
         logger.info(append("service-name", appName),"analyzed tweet with sentiment "+results.get("attitude"));
 
