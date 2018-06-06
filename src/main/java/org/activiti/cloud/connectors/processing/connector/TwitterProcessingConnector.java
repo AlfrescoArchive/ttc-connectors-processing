@@ -1,9 +1,8 @@
-package org.activiti.cloud.connectors.processing.processor;
+package org.activiti.cloud.connectors.processing.connector;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.activiti.cloud.connectors.processing.ProcessingConnectorChannels;
 import org.activiti.cloud.connectors.starter.channels.IntegrationResultSender;
 import org.activiti.cloud.connectors.starter.model.IntegrationRequestEvent;
 import org.activiti.cloud.connectors.starter.model.IntegrationResultEvent;
@@ -18,12 +17,12 @@ import org.springframework.stereotype.Component;
 
 import static net.logstash.logback.marker.Markers.append;
 
-
 @Component
 @EnableBinding(ProcessingConnectorChannels.class)
 public class TwitterProcessingConnector {
 
     private final Logger logger = LoggerFactory.getLogger(TwitterProcessingConnector.class);
+
     @Value("${spring.application.name}")
     private String appName;
 
@@ -38,17 +37,18 @@ public class TwitterProcessingConnector {
     public void processEnglish(IntegrationRequestEvent event) throws InterruptedException {
 
         String tweet = String.valueOf(event.getVariables().get("text"));
-        logger.info(append("service-name", appName),"placeholder for doing cleaning/processing of posted content sized "+(tweet==null?"null":tweet.length()));
+        logger.info(append("service-name",
+                           appName),
+                    ">>> Doing cleaning/processing of posted content sized " + (tweet == null ? "null" : tweet.length()));
 
         //@TODO: perform processing here
 
         Map<String, Object> results = new HashMap<>();
         results.put("text",
-                tweet);
+                    tweet);
         Message<IntegrationResultEvent> message = IntegrationResultEventBuilder.resultFor(event)
                 .withVariables(results)
                 .buildMessage();
         integrationResultSender.send(message);
     }
-
 }

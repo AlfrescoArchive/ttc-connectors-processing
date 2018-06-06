@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
-public class ProcessingCloudConnectorIT {
+public class ProcessingCloudConnectorAppIT {
 
     @Autowired
     private ApplicationContext context;

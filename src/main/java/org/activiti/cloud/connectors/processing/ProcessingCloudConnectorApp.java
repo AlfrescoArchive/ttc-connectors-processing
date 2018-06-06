@@ -18,45 +18,19 @@ package org.activiti.cloud.connectors.processing;
 
 import org.activiti.cloud.connectors.processing.analyzer.NLP;
 import org.activiti.cloud.connectors.starter.configuration.EnableActivitiCloudConnector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import static net.logstash.logback.marker.Markers.append;
 
 @SpringBootApplication
 @EnableActivitiCloudConnector
 @ComponentScan({"org.activiti.cloud.connectors.starter", "org.activiti.cloud.connectors.processing"})
-@RestController
-public class ProcessingCloudConnector implements CommandLineRunner {
-
-    private Logger logger = LoggerFactory.getLogger(ProcessingCloudConnector.class);
-    @Value("${spring.application.name}")
-    private String appName;
-
-    public ProcessingCloudConnector() {
-    }
+public class ProcessingCloudConnectorApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProcessingCloudConnector.class,
+        SpringApplication.run(ProcessingCloudConnectorApp.class,
                               args);
-    }
-
-    @RequestMapping(method = RequestMethod.GET, path = "/")
-    public String welcome() {
-        return "Welcome to the Content Processing and Sentiment Analysis Cloud Connector";
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        logger.debug(append("service-name", appName),"Starting Analyzer Connector Application");
+        // Init NPL Functions
         NLP.init();
     }
 }

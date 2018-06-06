@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.activiti.cloud.connectors.processing;
+package org.activiti.cloud.connectors.processing.connector;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;

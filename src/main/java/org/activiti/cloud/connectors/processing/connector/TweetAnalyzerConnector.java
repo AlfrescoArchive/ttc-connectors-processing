@@ -1,9 +1,9 @@
-package org.activiti.cloud.connectors.processing.analyzer;
+package org.activiti.cloud.connectors.processing.connector;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.activiti.cloud.connectors.processing.ProcessingConnectorChannels;
+import org.activiti.cloud.connectors.processing.analyzer.NLP;
 import org.activiti.cloud.connectors.starter.channels.IntegrationResultSender;
 import org.activiti.cloud.connectors.starter.model.IntegrationRequestEvent;
 import org.activiti.cloud.connectors.starter.model.IntegrationResultEvent;
@@ -37,22 +37,29 @@ public class TweetAnalyzerConnector {
 
         String tweet = String.valueOf(event.getVariables().get("text"));
 
-        Map<String, Object> results = new HashMap<>();
+        logger.info(append("service-name",
+                           appName),
+                    ">>> About to run the Sentiment Analisys over:" + tweet);
 
         // based on http://rahular.com/twitter-sentiment-analysis/
-        // note you get a lot of 1s but there are some zeros if you search for "attitude: 0"
+
         int sentiment = NLP.findSentiment(tweet);
         String attitude = "neutral";
-        if(sentiment >=3){
+        if (sentiment >= 3) {
             attitude = "positive";
-        }else if(sentiment < 1){
+        } else if (sentiment < 1) {
             attitude = "negative";
         }
 
-        results.put("attitude", attitude);
-        results.put("matched", "true");
+        Map<String, Object> results = new HashMap<>();
+        results.put("attitude",
+                    attitude);
+        results.put("matched",
+                    "true");
 
-        logger.info(append("service-name", appName),"analyzed tweet with sentiment "+results.get("attitude"));
+        logger.info(append("service-name",
+                           appName),
+                    ">>> Analyzed tweet with sentiment " + results.get("attitude"));
 
         Message<IntegrationResultEvent> message = IntegrationResultEventBuilder.resultFor(event)
                 .withVariables(results)
