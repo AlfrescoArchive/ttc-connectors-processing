@@ -7,8 +7,6 @@ Sentiment Analysis capabilities.
 
 This connector provides a placeholder for doing more advanced social media content processing, such as text cleaning,
 image recognition and advanced classification of content. It does sentiment analysis based on the Standford NLP library. 
-  
-
 
 # Run
 
