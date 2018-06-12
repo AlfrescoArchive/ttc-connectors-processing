@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProcessingController {
     @RequestMapping(method = RequestMethod.GET, path = "/")
     public String welcome() {
-        return "Welcome to the Content Processing and Sentiment Analysis Cloud Connector";
+        return " { 'welcome' : 'Welcome to the Content Processing and Sentiment Analysis Cloud Connector' }";
     }
 
 }
