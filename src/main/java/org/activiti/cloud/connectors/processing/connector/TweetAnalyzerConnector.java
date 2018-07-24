@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.activiti.cloud.connectors.processing.analyzer.NLP;
 import org.activiti.cloud.connectors.starter.channels.IntegrationResultSender;
-import org.activiti.cloud.connectors.starter.model.IntegrationRequestEvent;
-import org.activiti.cloud.connectors.starter.model.IntegrationResultEvent;
-import org.activiti.cloud.connectors.starter.model.IntegrationResultEventBuilder;
+import org.activiti.cloud.connectors.starter.configuration.ConnectorProperties;
+import org.activiti.runtime.api.model.IntegrationRequest;
+import org.activiti.runtime.api.model.IntegrationResult;
+import org.activiti.cloud.connectors.starter.model.IntegrationResultBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -26,6 +28,9 @@ public class TweetAnalyzerConnector {
     @Value("${spring.application.name}")
     private String appName;
 
+    @Autowired
+    private ConnectorProperties connectorProperties;
+
     private final IntegrationResultSender integrationResultSender;
 
     public TweetAnalyzerConnector(IntegrationResultSender integrationResultSender) {
@@ -33,9 +38,9 @@ public class TweetAnalyzerConnector {
     }
 
     @StreamListener(value = ProcessingConnectorChannels.TWITTER_ANALYZER_CONSUMER)
-    public void analyzeEnglishTweet(IntegrationRequestEvent event) throws InterruptedException {
+    public void analyzeEnglishTweet(IntegrationRequest event) throws InterruptedException {
 
-        String tweet = String.valueOf(event.getVariables().get("text"));
+        String tweet = String.valueOf(event.getIntegrationContext().getInBoundVariables().get("text"));
 
         logger.info(append("service-name",
                            appName),
@@ -61,8 +66,8 @@ public class TweetAnalyzerConnector {
                            appName),
                     ">>> Analyzed tweet with sentiment " + results.get("attitude"));
 
-        Message<IntegrationResultEvent> message = IntegrationResultEventBuilder.resultFor(event)
-                .withVariables(results)
+        Message<IntegrationResult> message = IntegrationResultBuilder.resultFor(event, connectorProperties)
+                .withOutboundVariables(results)
                 .buildMessage();
 
         integrationResultSender.send(message);
