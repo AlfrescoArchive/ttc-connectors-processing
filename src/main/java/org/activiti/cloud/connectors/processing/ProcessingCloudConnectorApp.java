@@ -24,7 +24,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableActivitiCloudConnector
-@ComponentScan({"org.activiti.cloud.connectors.starter", "org.activiti.cloud.connectors.processing"})
 public class ProcessingCloudConnectorApp {
 
     public static void main(String[] args) {
