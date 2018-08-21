@@ -13,6 +13,11 @@
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
   </properties>
   <dependencyManagement>
+    <dependency>
+      <groupId>org.activiti.cloud</groupId>
+      <artifactId>activiti-cloud-services-common-security-keycloak</artifactId>
+      <version>${activiti.cloud.version}</version>
+    </dependency>
     <dependencies>
 			<dependency>
         <groupId>org.activiti.cloud</groupId>
