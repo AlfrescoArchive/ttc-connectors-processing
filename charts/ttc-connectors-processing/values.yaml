@@ -20,7 +20,7 @@ image:
   tag: dev
   pullPolicy: IfNotPresent
 service:
-  name: ttc-connectors-dummytwitter
+  name: ttc-connectors-processing
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
