@@ -14,7 +14,7 @@
   </properties>
   <dependencyManagement>
     <dependencies>
-			<dependency>
+      <dependency>
         <groupId>org.activiti.cloud</groupId>
         <artifactId>activiti-cloud-dependencies</artifactId>
         <version>${activiti.cloud.version}</version>
@@ -29,6 +29,11 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.activiti.cloud</groupId>
+      <artifactId>activiti-cloud-services-common-security-keycloak</artifactId>
+      <version>${activiti.cloud.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.activiti.cloud</groupId>
       <artifactId>activiti-cloud-starter-connector</artifactId>
