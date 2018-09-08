@@ -51,7 +51,7 @@ public class TweetAnalyzerConnector {
         String attitude = "neutral";
         if (sentiment >= 3) {
             attitude = "positive";
-        } else if (sentiment < 1) {
+        } else if (sentiment <= 1) {
             attitude = "negative";
         }
 
