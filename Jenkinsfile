@@ -30,13 +30,6 @@ pipeline {
             sh "mvn install"
             sh 'export VERSION=$PREVIEW_VERSION && skaffold build -f skaffold.yaml'
           }
-
-          //dir ('./charts/preview') {
-          // container('maven') {
-          //   sh "make preview"
-          //   sh "jx preview --app $APP_NAME --dir ../.."
-          // }
-          //}
         }
       }
       stage('Build Release') {
@@ -88,12 +81,6 @@ pipeline {
     post {
         always {
             cleanWs()
-        }
-        failure {
-            input """Pipeline failed. 
-We will keep the build pod around to help you diagnose any failures. 
-
-Select Proceed or Abort to terminate the build pod"""
         }
     }
   }

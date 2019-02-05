@@ -14,8 +14,8 @@ global:
   keycloak:
     url: ""
 javaOpts:
-  xmx: 512m
-  xms: 512m
+  xmx: 1024m
+  xms: 768m
   other: -XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90
 image:
   repository: draft
@@ -31,18 +31,19 @@ service:
 resources:
   limits:
     cpu: 500m
-    memory: 768Mi
+    memory: 1024i
   requests:
     cpu: 400m
     memory: 768Mi
 probePath: /actuator/health
 livenessProbe:
-  initialDelaySeconds: 120
-  periodSeconds: 10
-  successThreshold: 1
-  timeoutSeconds: 1
+  initialDelaySeconds: 140
+  periodSeconds: 15
+  timeoutSeconds: 10
+  failureThreshold: 40
 readinessProbe:
-  periodSeconds: 90
-  successThreshold: 1
-  timeoutSeconds: 1
-terminationGracePeriodSeconds: 10
+  initialDelaySeconds: 20
+  periodSeconds: 10
+  timeoutSeconds: 20
+  failureThreshold: 40
+terminationGracePeriodSeconds: 20
