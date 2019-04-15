@@ -15,7 +15,7 @@
   <properties>
     <stanford-corenlp.version>3.9.1</stanford-corenlp.version>
     <java.version>11</java.version>
-    <activiti-cloud-dependencies.version>7.1.50</activiti-cloud-dependencies.version>
+    <activiti-cloud-dependencies.version>7.1.51</activiti-cloud-dependencies.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
